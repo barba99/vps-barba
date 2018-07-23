@@ -160,7 +160,7 @@ sleep 1
 echo -e "$b  ["$v"OK$b]  "$v"Sucesso..."
 echo ""
 echo -e ""$b"--------------------------------------------------------"
-echo -e "SQUID INSTALADO CON EXITO, AHORA CREA  UN USUARIO E\nTESTE PRA VER SI ESTAR TODO OK"
+echo -e "SQUID INSTALADO COM SUCESSO, AGORA CRIE UM USUARIO E\nTESTE PRA VER SI ESTAR TUDO OK"
 echo -e ""$b"--------------------------------------------------------"
 }
 if [[ -f /etc/squid3/squid.conf ]]; then
@@ -173,7 +173,7 @@ if [[ -f /etc/squid3/squid.conf ]]; then
 "$b"["$v"04"$b"]"$Ver" DESISTALAR SQUID3
 "$b"["$v"05"$b"]"$Ver" SAIR"
     echo ""
-    echo -e ""$Ver"["$v"Digite una opcion$Ver]";echo -n ": ";read option1
+    echo -e ""$Ver"["$v"Escolha uma opcao$Ver]";echo -n ": ";read option1
 
 case $option2 in
 1)
@@ -213,7 +213,7 @@ echo -e ""$b"SQUID3 DESISTALDO!"
 exit
 ;;
 5)
-echo -e ""$b"SALIENDO..."
+echo -e ""$b"SAINDO..."
 sleep 2
 exit
 ;;
@@ -268,11 +268,11 @@ echo -e ""$b"SQUID DESISTALDO!"
 exit
 ;;
 5)
-echo -e ""$b"SALIENDO..."
+echo -e ""$b"SAINDO..."
 sleep 2
 exit
 ;;
 esac
   fi
  fi
-reinstallh
+reinstall

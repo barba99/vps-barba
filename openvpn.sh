@@ -103,8 +103,8 @@ sleep 1s
 instala_ovpn () {
 parametros_iniciais () {
 #Verifica o Sistema
-[[ "$EUID" -ne 0 ]] && echo "Desculpe, vocï¿½ precisa rodar isso como root" && return 1
-[[ ! -e /dev/net/tun ]] && echo "TUN nï¿½o estï¿½ disponï¿½vel" && return 1
+[[ "$EUID" -ne 0 ]] && echo "Desculpe, você precisa rodar isso como root" && return 1
+[[ ! -e /dev/net/tun ]] && echo "TUN não está disponível" && return 1
 if [[ -e /etc/debian_version ]]; then
 OS="debian"
 VERSION_ID=$(cat /etc/os-release | grep "VERSION_ID")
@@ -113,7 +113,7 @@ IPTABLES='/etc/iptables/iptables.rules'
 [[ ! -e $IPTABLES ]] && touch $IPTABLES
 SYSCTL='/etc/sysctl.conf'
  [[ "$VERSION_ID" != 'VERSION_ID="7"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="8"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="9"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="14.04"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="16.04"' ]] && [[ "$VERSION_ID" != 'VERSION_ID="17.10"' ]] && {
- echo " Sua versï¿½o do Debian / Ubuntu nï¿½o ï¿½ suportada."
+ echo " Sua versão do Debian / Ubuntu não é suportada."
  while [[ $CONTINUE != @(y|Y|s|S|n|N) ]]; do
  read -p "Continuar ? [y/n]: " -e CONTINUE
  done
@@ -160,7 +160,7 @@ done
 [[ $PROTOCOL = "TCP" ]] && PROTOCOL=tcp
 #DNS
 echo -e "$barra\n\033[1;33m$(fun_trans ${id} "Qual DNS voce deseja usar?")\n$barra"
-echo "   1) Usar padrï¿½es do sistema "
+echo "   1) Usar padrões do sistema "
 echo "   2) Cloudflare"
 echo "   3) Quad"
 echo "   4) FDN"
@@ -173,7 +173,7 @@ while [[ $DNS != @([1-9]) ]]; do
 read -p "DNS [1-9]: " -e -i 1 DNS
 done
 #CIPHER
-echo -e "$barra\n\033[1;33m$(fun_trans ${id} "Escolha qual codificaï¿½ï¿½o vocï¿½ deseja usar para o canal de dados:")\n$barra"
+echo -e "$barra\n\033[1;33m$(fun_trans ${id} "Escolha qual codificação você deseja usar para o canal de dados:")\n$barra"
 echo "   1) AES-128-CBC"
 echo "   2) AES-192-CBC"
 echo "   3) AES-256-CBC"
@@ -197,8 +197,8 @@ echo -e "$barra\n\033[1;33m$(fun_trans ${id} "Estamos prontos para configurar se
 read -n1 -r -p "Enter to Continue..."
 }
 parametros_iniciais # BREVE VERIFICACAO
-coleta_variaveis # COLETA VARIAVEIS PARA INSTALAï¿½ï¿½O
-add_repo # ATUALIZA REPOSITï¿½RIO OPENVPN E INSTALA OPENVPN
+coleta_variaveis # COLETA VARIAVEIS PARA INSTALAÇÃO
+add_repo # ATUALIZA REPOSITÓRIO OPENVPN E INSTALA OPENVPN
 # Cria Diretorio
 [[ ! -d /etc/openvpn ]] && mkdir /etc/openvpn
 # Install openvpn
