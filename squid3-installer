@@ -1,0 +1,278 @@
+b="\033[1;37m"
+v="\033[1;32m"
+Ver="\033[1;31m"
+clear
+reinstall () 
+{
+#!/bin/bash
+clear
+b="\033[1;37m"
+v="\033[1;32m"
+Ver="\033[1;31m"
+if [[ -e /etc/centos-release || -e /etc/redhat-release ]]; then
+	OS=centos
+fi
+if [[ -e /etc/debian_version ]]; then
+	OS="debian"
+fi
+VERSION_ID=$(cat /etc/os-release | grep "VERSION_ID")
+IP=$(cat /etc/IP)
+so=$(cat -n /etc/issue |grep 1 |cut -d' ' -f6,7,8 |sed 's/1//' |sed 's/	//')
+PORTS="3128 8080 & 80"
+SSH="443 & 22"
+dono=$(cat /etc/dono)
+SIP=$(printf '%-23s' "$IP")
+soo=$(printf '%-20s' "$so")
+porta=$(printf '%-23s' "$PORTS")
+ssh=$(printf '%-23s' "$SSH")
+donu=$(printf '%-21s' "$dono")
+echo -e "          $b==========>>>"$v"SQUID INSTALLER"$b"<<<=========="
+echo ""
+echo -e ""$b"--------------------------------------------------------"
+echo -e "| $Ver---> "$b"SEU IP: "$Ver"       --->    "$v"$SIP  $b|
+| $Ver---> "$b"PORTAS SSH: "$Ver"   --->   "$v" $ssh  $b|
+| $Ver---> "$b"PORTAS SQUID: "$Ver" --->   "$v" $porta  $b|
+| $Ver---> "$b"SEU NOME: "$Ver"     --->   "$v" $donu    $b|
+| $Ver---> "$b"SISTEMA: "$Ver"      --->   "$v" $soo     $b|"
+echo -e ""$b"--------------------------------------------------------"
+echo ""
+echo -e "[[ "$Ver"--> "$b"NSTALANDO PRE REQUISITOS...]]"
+    if [[ "$OS" = 'debian' ]]; then
+      apt-get install squid -y >/dev/null 2>/dev/null
+      fi
+      
+      if [[ "$OS" = 'debian' ]]; then
+      apt-get install squid3 -y >/dev/null 2>/dev/null
+      fi
+      
+		if [[ "$VERSION_ID" = 'VERSION_ID="7"' ]]; then
+			apt-get update 1>/dev/null 2>/dev/null
+            apt -get install squid3 -y 1>/dev/null 2>/dev/null
+		fi
+# debian 8
+if [[ "$VERSION_ID" = 'VERSION_ID="8"' ]]; then
+			apt-get update 1>/dev/null 2>/dev/null
+            if apt-get install squid -y 1>/dev/null 2>/dev/null
+             then
+         echo ""
+           else
+           apt-get install squid3 -y 1>/dev/null 2>/dev/null
+		fi
+fi
+#Ubuntu 12.04
+if [[ "$VERSION_ID" = 'VERSION_ID="12.04"' ]]; then
+			apt-get update 1>/dev/null 2>/dev/null
+            apt -get install squid3 -y 1>/dev/null 2>/dev/null
+		fi
+# Ubuntu 14.04
+		if [[ "$VERSION_ID" = 'VERSION_ID="14.04"' ]]; then
+			apt-get update 1>/dev/null 2>/dev/null
+            apt -get install squid3 -y 1>/dev/null 2>/dev/null
+		fi
+# Ubuntu 16.04
+if [[ "$VERSION_ID" = 'VERSION_ID="16.04"' ]]; then
+            apt-get update 1>/dev/null 2>/dev/null
+            apt -get install squid -y 1>/dev/null 2>/dev/null
+fi
+# Ubuntu 16.10
+if [[ "$VERSION_ID" = 'VERSION_ID="16.10"' ]]; then
+            apt-get update 1>/dev/null 2>/dev/null
+            apt -get install squid -y 1>/dev/null 2>/dev/null
+fi
+if [[ "$OS" = 'centos' ]]; then
+yum update >/dev/null 2>/dev/null
+yum -y install squid >/dev/null 2>/dev/null
+fi
+echo -e "$b  ["$v"OK$b]  "$v"Sucesso..."
+sleep 2
+
+echo -e ""$b"[[ "$Ver"--> "$b"ALTERANDO SSH...]]"
+echo 'Port 443
+PermitRootLogin yes
+PubkeyAuthentication yes
+PasswordAuthentication yes
+' >> /etc/ssh/sshd_config
+sleep 2
+echo -e "$b  ["$v"OK$b]  "$v"Sucesso..."
+
+if [[ -d /etc/squid ]]; then
+echo -e ""$b"[[ "$Ver"--> "$b"ALTERANDO SQUID...]]"
+echo "# Portas do SQUID
+http_port 80
+http_port 8080
+http_port 3128
+# ACLs e Liberações
+acl accept dstdomain -i $IP
+acl allowed dstdomain -i /etc/payloads
+acl combr dstdomain -i .com.br
+acl com dstdomain -i .com
+acl all src 0.0.0.0/0.0.0.0
+http_access allow accept
+http_access allow allowed
+http_access allow combr
+http_access allow com
+http_access deny all
+always_direct allow all
+# Anonimo
+forwarded_for off
+# Pipeline
+#pipeline_prefetch on" >/etc/squid/squid.conf
+sleep 1
+echo -e "$b  ["$v"OK$b]  "$v"Sucesso..."
+else
+echo -e ""$b"[[ "$Ver"--> "$b"ALTERANDO SQUID3...]]"
+echo "# Portas do SQUID
+http_port 80
+http_port 8080
+http_port 3128
+# ACLs e Liberações
+acl accept dstdomain -i $IP
+acl allowed dstdomain -i /etc/payloads
+acl combr dstdomain -i .com.br
+acl com dstdomain -i .com
+acl all src 0.0.0.0/0.0.0.0
+http_access allow accept
+http_access allow allowed
+http_access allow combr
+http_access allow com
+http_access deny all
+always_direct allow all
+# Anonimo
+forwarded_for off
+# Pipeline
+#pipeline_prefetch on" >/etc/squid3/squid.conf
+sleep 2
+echo -e "$b  ["$v"OK$b]  "$v"Sucesso..."
+fi
+echo -e "$b""[[ "$Ver"--> "$b"RENICIANDO SERVICOS...]]"
+if service ssh restart >/dev/null 2>/dev/null; then
+service squid restart >/dev/null 2>/dev/null
+service squid3 restart >/dev/null 2>/dev/null
+else
+service sshd restart >/dev/null 2>/dev/null
+service squid restart >/dev/null 2>/dev/null
+fi
+echo ".claro.com.br
+.claro.com.sv
+.vivo.com.br
+.ddivulga.com" > /etc/payloads
+sleep 1
+echo -e "$b  ["$v"OK$b]  "$v"Sucesso..."
+echo ""
+echo -e ""$b"--------------------------------------------------------"
+echo -e "SQUID INSTALADO CON EXITO, AHORA CREA  UN USUARIO E\nTESTE PRA VER SI ESTAR TODO OK"
+echo -e ""$b"--------------------------------------------------------"
+}
+if [[ -f /etc/squid3/squid.conf ]]; then
+    echo -e "      "$b"SQUID3 INSTALADO!"
+    echo ""
+    echo -e "
+"$b"["$v"01"$b"]"$Ver" RENICIAR SQUID3
+"$b"["$v"02"$b"]"$Ver" PARAR SQUID3
+"$b"["$v"03"$b"]"$Ver" REINSTALAR SQUID3
+"$b"["$v"04"$b"]"$Ver" DESISTALAR SQUID3
+"$b"["$v"05"$b"]"$Ver" SAIR"
+    echo ""
+    echo -e ""$Ver"["$v"Digite una opcion$Ver]";echo -n ": ";read option1
+
+case $option2 in
+1)
+echo -e ""$b"RENICIANDO SQUID3..."
+service squid3 reload 1>/dev/null 2>/dev/null
+service squid3 restart 1>/dev/null 2>/dev/null
+sleep 1
+echo -e ""$b"["$v"OK"$b"]$b Sucesso..."
+sleep 1
+echo -e ""$b"SQUID3 RENICIADO!"
+exit
+;;
+2)
+echo -e ""$b"PARANDO SQUID3..."
+service squid3 stop 1>/dev/null 2>/dev/null
+sleep 1
+echo -e ""$b"["$v"OK"$b"]$b Sucesso..."
+sleep 1
+echo -e ""$b"SQUID3 PARADO!"
+exit
+;;
+3)
+echo -e ""$b"REISTALANDO SQUID3..."
+apt-get purge squid3 -y 1>/dev/null 2>/dev/null
+apt-get autoremove -y 1>/dev/null 2>/dev/null
+reinstall
+exit
+;;
+4)
+echo -e ""$b"DESISTALANDO SQUID3..."
+apt-get purge squid3 -y 1>/dev/null 2>/dev/null
+apt-get autoremove -y 1>/dev/null 2>/dev/null
+sleep 1
+echo -e ""$b"["$v"OK"$b"]$b Sucesso..."
+sleep 1
+echo -e ""$b"SQUID3 DESISTALDO!"
+exit
+;;
+5)
+echo -e ""$b"SALIENDO..."
+sleep 2
+exit
+;;
+esac
+else 
+if [[ -f /etc/squid/squid.conf ]]; then
+    echo -e "      "$b"SQUID INSTALADO!"
+    echo ""
+    echo -e "
+"$b"["$v"01"$b"]"$Ver" RENICIAR SQUID
+"$b"["$v"02"$b"]"$Ver" PARAR SQUID
+"$b"["$v"03"$b"]"$Ver" REINSTALAR SQUID
+"$b"["$v"04"$b"]"$Ver" DESISTALAR SQUID
+"$b"["$v"05"$b"]"$Ver" SAIR"
+    echo ""
+    echo -e ""$Ver"["$v"Escolha uma opcao$Ver]";echo -n ": ";read option2
+case $option2 in
+1)
+echo -e ""$b"RENICIANDO SQUID..."
+service squid reload 1>/dev/null 2>/dev/null
+service squid restart 1>/dev/null 2>/dev/null
+sleep 1
+echo -e ""$b"["$v"OK"$b"]$b Sucesso..."
+sleep 1
+echo -e ""$b"SQUID RENICIADO!"
+exit
+;;
+2)
+echo -e ""$b"PARANDO SQUID..."
+service squid stop 1>/dev/null 2>/dev/null
+sleep 1
+echo -e ""$b"["$v"OK"$b"]$b Sucesso..."
+sleep 1
+echo -e ""$b"SQUID PARADO!"
+exit
+;;
+3)
+echo -e ""$b"REISTALANDO SQUID..."
+apt-get purge squid -y 1>/dev/null 2>/dev/null
+apt-get autoremove -y 1>/dev/null 2>/dev/null
+reinstall
+exit
+;;
+4)
+echo -e ""$b"DESISTALANDO SQUID..."
+apt-get purge squid -y 1>/dev/null 2>/dev/null
+apt-get autoremove -y 1>/dev/null 2>/dev/null
+sleep 1
+echo -e ""$b"["$v"OK"$b"]$b Sucesso..."
+sleep 1
+echo -e ""$b"SQUID DESISTALDO!"
+exit
+;;
+5)
+echo -e ""$b"SALIENDO..."
+sleep 2
+exit
+;;
+esac
+  fi
+ fi
+reinstallh
