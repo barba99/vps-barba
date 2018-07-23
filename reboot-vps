@@ -1,0 +1,9 @@
+#!/bin/bash
+clear
+b="\033[1;37m"
+v="\033[1;32m"
+Ver="\033[1;31m"
+echo -e ""$Ver"REINICIANDO VPS..."
+sleep 2
+echo -e ""$Ver"Saliendo de  shell..."
+reboot 1>/devnull 2>/dev/null
