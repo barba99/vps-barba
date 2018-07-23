@@ -1,0 +1,28 @@
+clear
+b="\033[1;37m"
+v="\033[1;32m"
+Ver="\033[1;31m"
+echo -e " \033[0m               \033[47;30mMONITOR-SSH\033[0m"
+echo ""
+echo -e "$b-------------------------------------------------"
+echo -e "\033[47;30m"$Ver"Usuario.C         Data de.E           Conexoes.S \033[0m"
+echo -e "$b-------------------------------------------------"
+for usuario in `awk -F : '$3 > 900 { print $1 }' /etc/passwd |grep -v "nobody" |grep -vi polkitd |grep -vi systemd-[a-z] |grep -vi systemd-[0-9] |sort`; do
+if [ -f /etc/CONFVPS/limite/$usuario ]; then
+limite=$(cat -n /etc/CONFVPS/limite/$usuario |awk '$1 = 1 {print $2}')
+else
+limite=null
+fi
+usurnum=$(ps -u $usuario |grep sshd |wc -l)
+data=$(chage -l $usuario |grep -i co |awk -F : '{print $2}')
+Dataa=$(printf '%-23s' "$data")
+usuariio=$(printf ' %-14s' "$usuario")
+cone=$(printf ' %-1s' "$usurnum")
+echo -e ""$v"$usuariio $Dataa $cone/$limite"
+echo -e "$b-------------------------------------------------"
+done
+
+
+
+
+
