@@ -1,0 +1,57 @@
+#!/bin/bash
+b="\033[1;37m"
+v="\033[1;32m"
+Ver="\033[1;31m"
+chk=$(cat /etc/ssh/sshd_config |grep Banner )
+if echo "$chk" |grep -v "#Banner" |grep Banner > /dev/null 2> /dev/null
+then
+local=$(echo "$chk" |grep -v "#Banner" |grep Banner |awk '{print $2}')
+else
+echo "Banner /etc/bannerssh" >> /etc/ssh/sshd_config
+service ssh restart > /dev/null 2> /dev/null
+service sshd restart > /dev/null 2> /dev/null
+fi
+clear
+echo -e "\033[0m                        \033[47;30mBANNER 2.0\033[0m"
+echo " "
+echo -e "$b[$v 01 $b]$Ver EDITAR BANNER"
+echo -e "$b[$v 02 $b]$Ver ELIMINAR BANNER"
+echo -e "$b[$v 03 $b]$Ver MENU"
+echo -e "$b"
+read -p ": " opcao
+case $opcao in
+1)
+clear
+echo  -e ""$b"=========>>>"$v"EDIT-BANNER"$b"<<<========="
+echo ""
+read -p "MSG: " banner
+echo "$banner" > $local
+service ssh restart > /dev/null 2> /dev/null
+service sshd restart > /dev/null 2> /dev/null
+sleep 3
+echo ""
+echo -e ""$v"BANNER CREADO CON EXITO..."
+;;
+2)
+echo -e ""$Ver"ELINAR  BANNER..."
+rm /etc/bannerssh > /dev/null 2> /dev/null
+sleep 2
+echo -e "BANNER ELIMINADO..."
+echo -e "$b"
+;;
+3)
+CONFVPS
+;;
+esac
+
+
+
+
+
+
+
+
+
+
+
+
