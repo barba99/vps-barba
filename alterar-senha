@@ -1,0 +1,7 @@
+#!/bin/bash
+clear
+echo -e -n "\033[1;32mNova senha: \033[1;37m";read senha
+(echo $senha ; echo $senha) | passwd root 1>/dev/null 2>/dev/null
+echo -e "\033[1;32mSenha root salva"
+sleep 1
+echo -e "\033[1;31mNova Senha:\033[1;32m $senha"
