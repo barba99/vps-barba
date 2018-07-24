@@ -18,14 +18,14 @@ rosa="\033[1;35m"
 cyann="\033[2;36m"
 branco="\033[1;37m"
 cyann="\033[2;36m"
-# BY: JORGE BARBA
+# BY: Glemysson
 clear
-echo -e "DIGITE HOST A ADICIONAR"
+echo -e "Digite sua host que deseja adicionar
 ao /etc/payloads"
 read -p ": " host
 echo ".$host" >>/etc/payloads
 sleep 2
-echo "Su host fue adiconado com éxito"
+echo "Sua host foi adiconada com sucesso"
 sleep 2
-echo "Saliendo..."
+echo "Saindo..."
 exit

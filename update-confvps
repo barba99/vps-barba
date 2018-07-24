@@ -1,0 +1,57 @@
+#!/bin/bash
+b="\033[1;37m"
+v="\033[1;32m"
+Ver="\033[1;31m"
+clear
+echo -e "\033[0m                \033[47;30mATUALIZANDO CONFVPS 2.0... \033[0m" 
+echo ""
+IP=$(cat /etc/IP)
+dono=$(cat /etc/dono)
+echo -e ""$v"SEU IP: $Ver$IP"
+echo -e ""$v"SEU NOME: $Ver$dono"
+if yum -y update 1>/dev/null 2>/dev/null
+then
+yum -y update 1>/dev/null 2>/dev/null
+yum -y install git 1>/dev/null 2>/dev/null
+git clone https://github.com/GlEmYsSoN-LiNuX/CONFVPS.git 1>/dev/null 2>/dev/null
+cd CONFVPS
+rm -rf README.md
+rm -rf install
+rm -rf remove.sh
+for arqs in `ls`
+do
+rm /bin/$arqs 2>/dev/null
+mv $arqs /bin
+chmod +x /bin/$arqs
+done
+echo -e "\033[0;32mACTUALIZACION CREADA CON EXITO"
+echo -e "\033[0;32mDIGITE COMANDO:\033[1;37m CONFVPS"
+else
+clear
+echo -e "\033[0m                \033[47;30mACTUALIZANDO CONFVPS 3.0... \033[0m" 
+echo ""
+IP=$(cat /etc/IP)
+dono=$(cat /etc/dono)
+echo -e ""$v"SEU IP: $Ver$IP"
+echo -e ""$v"SEU NOME: $Ver$dono"
+apt-get update 1>/dev/null 2>/dev/null
+apt-get install -y git 1>/dev/null 2>/dev/null
+git clone https://github.com/GlEmYsSoN-LiNuX/CONFVPS.git 1>/dev/null 2>/dev/null
+cd CONFVPS
+rm -rf README.md
+rm -rf installer.sh
+rm -rf remove.sh
+for arqs in `ls`
+do
+rm /bin/$arqs 2>/dev/null
+mv $arqs /bin
+chmod +x /bin/$arqs
+done
+echo -e "\033[1;36m             ACTUALIZACIÓN TERMINADO \033[1;36m"
+echo -e "\033[0;34m-----------------------------------------------\033[0;34m"
+figlet ..BARBA..
+echo -e "\033[0;34m-----------------------------------------------\033[0m"
+fi
+cd
+rm -rf installer.sh 2> /dev/null
+rm -rf CONFVPS 2> /dev/null
