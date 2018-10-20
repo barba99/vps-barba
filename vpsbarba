@@ -1,0 +1,179 @@
+#!/bin/bash
+
+# cor
+
+b="\033[1;37m"
+
+v="\033[1;32m"
+
+Ver="\033[1;31m"
+
+if [ $(id -u) -eq 0 ]
+
+then
+
+	clear
+
+else
+
+	if echo $(id) |grep sudo > /dev/null
+
+	then
+
+	clear
+
+	echo "VOCE NÃO É USUARIO ROOT"
+
+sleep 2
+
+echo "PARA VIRAR ROOT BASTA DIGITAR ( sudo su )"
+
+	fi
+
+fi
+
+clear
+
+IP=$(cat /etc/IPMENU)
+
+echo -e "$b=====================>>>"$v"VPS-BARBA"$b"<<<======================"
+
+echo -e " \033[1;37m VPS-BARBA V: FINAL ["$Ver"EDITADO POR @Jorge_barba'R"$b"]\033[0m"
+
+echo -e " $v Att: 05/08/2017"
+
+echo -e "\033[1;37mSeleccione una opcion: 
+echo -e "\033[1;37mPara Salir digite la \033[1;31mopcion 0\033[1;33m"
+
+echo -e "\033[1;37mSeu IP \033[1;37m(\033[1;32m$IP\033[1;37m)"
+
+echo -e " $b["$v"0"$b"]$Ver Salir"
+
+echo ""
+
+echo -e "$b["$v"01$b]$Ver INSTALAR SQUID         $b["$v"11$b]$Ver DESISTALAR MODULOS"
+
+echo -e "$b["$v"02$b]$Ver INSTALAR DROPBEAR      $b["$v"12$b]$Ver ALTERAR SENHA ROOT"
+
+echo -e "$b["$v"03$b]$Ver INSTALAR OPENVPN       $b["$v"13$b]$Ver RENICIAR VPS"
+
+echo -e "$b["$v"04$b]$Ver MENU DE USUARIOS       $b["$v"14$b]$Ver ATUALIZAR VPS-BARBA"
+
+echo -e "$b["$v"05$b]$Ver MONITOR SSH            $b["$v"15$b]$Ver OCULTAR IP DO MENU"
+
+echo -e "$b["$v"06$b]$Ver SPEEDTEST"
+
+echo -e "$b["$v"07$b]$Ver ADD BANNER"
+
+echo -e "$b["$v"08$b]$Ver ADDHOST"
+
+echo -e "$b["$v"09$b]$Ver REMOVER CONFVPS"
+
+echo -e "$b["$v"10$b]$Ver UPDATE VPS"
+
+echo -e "$b===========================>>>""<<<==========================="
+
+echo -e "$Ver"
+
+echo -e "$b["$v"Escolha uma opcao"$b"]";read -p "└─>> " opcao
+
+case $opcao in
+
+1)
+
+squid3-installer
+
+;;
+
+2)
+
+dropbear-installer
+
+;;
+
+3)
+
+vpn-installer
+
+;;
+
+4)
+
+users-gen
+
+;;
+
+5)
+
+monitor-ssh
+
+;;
+
+6)
+
+speedtest.py
+
+;;
+
+7)
+
+banner
+
+;;
+
+8)
+
+addhost
+
+;;
+
+9)
+
+unistallerSSnfvps
+
+;;
+
+0)
+
+exit
+
+;;
+
+10)
+
+vps-update
+
+;;
+
+11)
+
+unistaller-modulos
+
+;;
+
+12)
+
+alterar-senha
+
+;;
+
+13)
+
+reboot-vps
+
+;;
+
+14)
+
+update-confvps
+
+;;
+
+15)
+
+ocultar-ip
+
+;;
+
+esac
+
