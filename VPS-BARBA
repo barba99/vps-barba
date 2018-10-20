@@ -29,8 +29,8 @@ echo -e "$b["$v"02$b]$Ver INSTALAR DROPBEAR            $b["$v"15$b]$Ver ALTERAR 
 echo -e "$b["$v"03$b]$Ver INSTALAR OPENVPN             $b["$v"16$b]$Ver RENICIAR VPS"
 echo -e "$b["$v"04$b]$Ver INSTALAR SSL                 $b["$v"17$b]$Ver ATUALIZAR CONFVPS"
 echo -e "$b["$v"05$b]$Ver ADMINISTRAR USUARIOS         $b["$v"18$b]$Ver OCULTAR IP DO MENU"
-echo -e "$b["$v"06$b]$Ver BOT DE TELEGRAM"             $b["$v"19$b]$Ver GENERADOR DE CC"
-echo -e "$b["$v"07$b]$Ver PAYLOAD BRUTE FORCE"         $b["$v"20$b]$Ver
+echo -e "$b["$v"06$b]$Ver BOT DE TELEGRAM              $b["$v"19$b]$Ver GENERADOR DE CC"
+echo -e "$b["$v"07$b]$Ver PAYLOAD BRUTE FORCE          $b["$v"20$b]$Ver CREDITOS"
 echo -e "$b["$v"08$b]$Ver MONITOR SSH
 echo -e "$b["$v"09$b]$Ver SPEEDTEST"
 echo -e "$b["$v"10$b]$Ver ADD BANNER"
