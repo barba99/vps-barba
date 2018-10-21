@@ -24,11 +24,11 @@ else
 
 	clear
 
-	echo "VOCE NÃO É USUARIO ROOT"
+	echo "usted  no es un  USUARIO ROOT"
 
 sleep 2
 
-echo "PARA VIRAR ROOT BASTA DIGITAR ( sudo su )"
+echo "PARA INSTALAR POR  ROOT SOLO DIGITE ( sudo su )"
 
 	fi
 
@@ -62,7 +62,7 @@ echo -e "$b["$v"03$b]$Ver DROPBEAR         $b["$v"13$b]$Ver SSL && SHADOWNSNOCK"
 
 echo -e "$b["$v"04$b]$Ver INSTALAR OPENVPN $b["$v"14$b]$Ver ATUALIZAR VPS-BARBA"
 
-echo -e "$b["$v"05$b]$Ver COLORES          $b["$v"15$b]$Ver OCULTAR IP"
+echo -e "$b["$v"05$b]$Ver MONITOR USUARIOS $b["$v"15$b]$Ver OCULTAR IP"
 
 echo -e "$b["$v"06$b]$Ver AÑADIR  BANNER"
 
@@ -78,7 +78,7 @@ echo -e "$b=====================>>>"$v"VPS-BARBA"$b"<<<======================"
 
 echo -e "$Ver"
 
-echo -e "$b["$v"Escolha uma opcion "$b"]";read -p "└─>> " opcao
+echo -e "$b["$v"Seleccione una opción "$b"]";read -p "└─>> " opcao
 
 case $opcao in
 
@@ -150,7 +150,7 @@ unistaller-modulos
 ;;
 
 12)
-
+squid3-installer
 ;;
 
 13)
