@@ -48,13 +48,14 @@ vpn-installer
 
 4)
 
-users-gen
+SSL
+
 
 ;;
 
 5)
 
-SSL
+users-agen tcc
 
 ;;
 
