@@ -25,7 +25,10 @@ echo -e "$b--------------------------------------------"
 done < /tmp/users.txt
 }
 clear
-echo -e "\033[1;37m                 \033[47;30m"$Ver Seleccióne una opción . abajo\033[0m"
+eááeá@
+
+@
+\033[47;30m"$Ver Seleccióne una opción . abajo\033[0m"
 echo ""
 echo -e "
 \033[1;37m[\033[0;34m01\033[1;37m] \033[0;34mELIMINAR USUARIOS"
