@@ -1,0 +1,142 @@
+#!/bin/bash
+#VERIFICACAO#
+if [ -d /etc/adm ]; then
+echo ""
+else
+mkdir /etc/adm
+fi
+if [ -d /etc/adm/usuarios ]; then
+echo ""
+else
+mkdir /etc/adm/usuarios
+fi
+if [ -d /etc/adm/modulo ]; then
+echo ""
+else
+mkdir /etc/adm/modulo
+fi
+if [ -e /etc/squid/squid.conf ]; then
+squid="on"
+else
+ if [ -e /etc/squid3/squid.conf ]; then
+squid="on"
+else
+squid="off"
+ fi
+fi
+#VERIFICACAO#
+while true
+do
+clear
+udpvar=$(netstat -nlpt | egrep -o udpgw)
+if [ -e /etc/adm/bnr ]; then
+/etc/adm/bnr
+fi
+if [ "$1" = "" ]; then
+echo -e "\033[0;35m--------------------------------------------------\033[0m"
+echo -e "\033[1;36mHERREMIENTAS: PARA SALIR DIGITE \033[1;31m[ 0 ]\033[1;36m O"
+echo -e "\033[0;35m--------------------------------------------------\033[0m"
+echo -e "\033[1;31m[ 1 ]\033[1;36m - CREAR PAYLOADS"
+if [[ `grep -c "^#ADM" /etc/sysctl.conf` -eq 0 ]]
+then
+echo -e "\033[1;31m[ 2 ]\033[1;36m - \033[1;31m(DESATIVADO)\033[1;36m ATIVAR TCP SPEED"
+ else
+echo -e "\033[1;31m[ 2 ]\033[1;36m - \033[1;32m(ATIVADO)\033[1;36m DESATIVAR TCP SPEED"
+fi
+if [ -e /etc/adm/modulo/udp ]; then
+ if [ "$udpvar" = "" ]; then
+echo -e "\033[1;31m[ 3 ]\033[1;36m -\033[1;31m (DESATIVADO)\033[1;36m INICIAR BAD UDP"
+else
+echo -e "\033[1;31m[ 3 ]\033[1;36m - \033[1;32m(ATIVADO)\033[1;36m PARAR BAD UDP"
+ fi
+else
+echo -e "\033[1;31m[ 3 ]\033[1;36m - INSTALAR BAD UDP"
+fi
+if [ -e /etc/adm/modulo/fail2ban ]; then
+echo -e "\033[1;31m[ 4 ]\033[1;36m - \033[1;32m(ATIVADO)\033[1;36m FAILBAN SQUID PROTECTION"
+else
+echo -e "\033[1;31m[ 4 ]\033[1;36m - \033[1;31m(DESATIVADO)\033[1;36m FAILBAN SQUID PROTECTION"
+fi
+if [ -e /etc/adm/modulo/firewall ]; then
+echo -e "\033[1;31m[ 5 ]\033[1;36m - \033[1;32m(ATIVADO)\033[1;36m DESATIVAR FIREWALL"
+else
+echo -e "\033[1;31m[ 5 ]\033[1;36m - \033[1;31m(DESATIVADO)\033[1;36m ATIVAR FIREWALL"
+fi
+echo -e "\033[1;31m[ 6 ]\033[1;36m - ABRIR/FECHAR PUERTOS\033[0m"
+if [ "$squid" = "on" ]; then
+ if [ -e /etc/adm/modulo/cache ]; then
+echo -e "\033[1;31m[ 9 ]\033[1;36m - \033[1;32m(ATIVADO)\033[1;36m DESATIVAR SQUID CACHE"
+else
+echo -e "\033[1;31m[ 9 ]\033[1;36m - \033[1;31m(DESATIVADO)\033[1;36m ATIVAR SQUID CACHE"
+ fi
+fi
+echo -e "\033[1;31m[ 7 ]\033[1;36m - VNC\033[0m"
+echo -e "\033[0;35m--------------------------------------------------\033[0m"
+read -p "OPCION: " opc
+else
+opc="$1"
+fi
+case $opc in
+0)
+menu
+break
+exit
+;;
+1)
+adm3fun adm1
+read -p "Enter"
+if [ "$1" != "" ]; then
+adm
+break
+fi
+;;
+2)
+adm3fun adm4
+read -p "Enter"
+if [ "$1" != "" ]; then
+adm
+break
+fi
+;;
+3)
+adm3fun adm5
+read -p "Enter"
+if [ "$1" != "" ]; then
+adm
+break
+fi
+;;
+4)
+adm3fun adm6
+read -p "Enter"
+if [ "$1" != "" ]; then
+adm
+break
+fi
+;;
+5)
+adm3fun adm7
+read -p "Enter"
+if [ "$1" != "" ]; then
+adm
+break
+fi
+;;
+6)
+portas
+break
+;;
+7)
+/bin/VNC
+break
+;;
+*)
+sleep 2s
+if [ "$1" != "" ]; then
+adm
+break
+fi
+;;
+esac
+sleep 2s
+done
