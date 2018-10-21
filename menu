@@ -62,16 +62,17 @@ echo -e "$b["$v"03$b]$Ver DROPBEAR         $b["$v"13$b]$Ver SSL && SHADOWNSNOCK"
 
 echo -e "$b["$v"04$b]$Ver INSTALAR OPENVPN $b["$v"14$b]$Ver ATUALIZAR VPS-BARBA"
 
-echo -e "$b["$v"05$b]$Ver COLORES          $b["$v"15$b]$Ver OCULTAR IP"
+echo -e "$b["$v"05$b]$Ver USUARIOS ONLINE  $b["$v"15$b]$Ver GENERADOR DE CC"
 
-echo -e "$b["$v"05$b]$Ver COLORES          $b["$v"15$b]$Ver OCULTAR IP"
-echo -e "$b["$v"07$b]$Ver BUSCADOR DE HOST"
+echo -e "$b["$v"06$b]$Ver SERVIDOR APACHE  $b["$v"16$b]$Ver OCULTAR IP"
+
+echo -e "$b["$v"07$b]$Ver VERIFICACION     $b["$v"17$b]$Ver CREDITOS"
 
 echo -e "$b["$v"08$b]$Ver REMOVER VPS-BARBA"
 
 echo -e "$b["$v"09$b]$Ver PAYLOAD BRUTE FORCE"
 
-echo -e "$b["$v"10$b]$Ver VERIFICACIÓN"
+echo -e "$b["$v"10$b]$Ver BUSCADOR DE HOST"
 
 echo -e "$b=====================>>>"$v"VPS-BARBA"$b"<<<======================"
 
